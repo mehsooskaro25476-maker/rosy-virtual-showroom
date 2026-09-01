@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rosy Electronics - Virtual Showroom</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0f172a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1e293b;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+        }
+        .company-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 15px;
+        }
+        .company-header h1 { font-size: 1.6rem; color: #3b82f6; }
+        .company-header p { font-size: 0.9rem; color: #94a3b8; margin-top: 5px; }
+        
+        .product-display-window {
+            width: 100%;
+            height: 220px;
+            background: radial-gradient(circle, #334155 0%, #0f172a 100%);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #475569;
+        }
+        
+        .ct-box-simulation {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,255,255,0.2);
+            transform: rotateX(15deg) rotateY(-15deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ct-box-simulation::before {
+            content: '';
+            width: 45px;
+            height: 45px;
+            background: #0f172a;
+            border-radius: 50%;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.8);
+        }
+
+        .product-label-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #3b82f6;
+            color: #fff;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        .section-title { font-size: 1rem; margin-bottom: 10px; color: #cbd5e1; font-weight: 600; }
+        .selector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .select-btn {
+            background: #334155; border: 1px solid #475569; color: #cbd5e1;
+            padding: 10px 5px; border-radius: 10px; font-weight: bold; cursor: pointer;
+            font-size: 0.85rem; text-align: center; transition: all 0.2s;
+        }
+        .select-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
+
+        .color-flex { display: flex; gap: 15px; margin-bottom: 25px; align-items: center; }
+        .color-dot {
+            width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+            border: 3px solid #1e293b; transition: all 0.2s;
+        }
+        .color-dot.active { border-color: #fff; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        .inquiry-btn-container { margin-top: 25px; }
+        .whatsapp-btn {
+            width: 100%; background: #25d366; color: #fff; border: none;
+            padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: bold;
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4); transition: transform 0.2s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="company-header">
+            <h1>ROSY Electronics</h1>
+            <p>Groups of Companies — Custom Current Transformers</p>
+        </div>
+
+        <div class="product-display-window">
+            <span id="product-badge" class="product-label-badge">Metering CT</span>
+            <div id="ct-object" class="ct-box-simulation" style="background-color: #78350f;"></div>
+            <p style="font-size: 0.8rem; color: #64748b; position: absolute; bottom: 10px;">Interactive Virtual Preview</p>
+        </div>
+
+        <div class="section-title">1. उत्पाद का प्रकार (Product Type) चुनें:</div>
+        <div class="selector-grid" id="product-group">
+            <button class="select-btn active" onclick="setProduct('Metering CT', this)">Metering CT</button>
+            <button class="select-btn" onclick="setProduct('Protection CT', this)">Protection CT</button>
+            <button class="select-btn" onclick="setProduct('Split-Core CT', this)">Split-Core CT</button>
+        </div>
+
+        <div class="section-title">2. बॉक्स का रंग (Resin/Casing Color) बदलें:</div>
+        <div class="color-flex">
+            <div class="color-dot active" style="background-color: #78350f;" onclick="setColor('#78350f', this)"></div>
+            <div class="color-dot" style="background-color: #475569;" onclick="setColor('#475569', this)"></div>
+            <div class="color-dot" style="background-color: #1e3a8a;" onclick="setColor('#1e3a8a', this)"></div>
+        </div>
+
+        <div class="section-title">3. करंट रेशियो (Current Ratio) चुनें:</div>
+        <div class="selector-grid" id="ratio-group">
+            <button class="select-btn active" onclick="setRatio('100/5A', this)">100/5A</button>
+            <button class="select-btn" onclick="setRatio('400/5A', this)">400/5A</button>
+            <button class="select-btn" onclick="setRatio('800/5A', this)">800/5A</button>
+        </div>
+
+        <div class="section-title">4. शुद्धता वर्ग (Accuracy Class) चुनें:</div>
+        <div class="selector-grid" id="class-group">
+            <button class="select-btn active" onclick="setClass('Class 0.5', this)">Class 0.5</button>
+            <button class="select-btn" onclick="setClass('Class 0.2s', this)">Class 0.2s</button>
+            <button class="select-btn" onclick="setClass('Class 1.0', this)">Class 1.0</button>
+        </div>
+
+        <div class="inquiry-btn-container">
+            <button class="whatsapp-btn" onclick="sendInquiry()">
+                💬 WhatsApp पर कोटेशन मांगें
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let selectedProduct = "Metering CT";
+        let selectedColorName = "Resin Cast Brown";
+        let selectedRatio = "100/5A";
+        let selectedClass = "Class 0.5";
+
+        // ⚠️ यहाँ अपना सही व्हाट्सएप्प नंबर बिना किसी स्पेस या '+' के लिखें
+        const myWhatsAppNumber = "919876543210"; 
+
+        function setProduct(name, element) {
+            selectedProduct = name;
+            document.getElementById('product-badge').innerText = name;
+            let buttons = document.getElementById('product-group').querySelectorAll('.select-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function setColor(hex, element) {
+            document.getElementById('ct-object').style.backgroundColor = hex;
+            if(hex === '#78350f') selectedColorName = "Resin Cast Brown";
+            if(hex === '#475569') selectedColorName = "Industrial Grey";
+            if(hex === '#1e3a8a') selectedColorName = "Warning Blue";
+            let dots = document.querySelectorAll('.color-dot');
+            dots.forEach(dot => dot.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function setRatio(ratio, element) {
+            selectedRatio = ratio;
+            let buttons = document.getElementById('ratio-group').querySelectorAll('.select-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function setClass(cls, element) {
+            selectedClass = cls;
+            let buttons = document.getElementById('class-group').querySelectorAll('.select-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function sendInquiry() {
+            const message = `नमस्ते Rosy Electronics! 👋\n\nमैंने आपके वर्चुअल शोरूम पर एक करंट ट्रांसफॉर्मर कस्टमाइज़ किया है, कृपया मुझे इसका कोटेशन भेजें:\n\n🔹 उत्पाद का प्रकार: ${selectedProduct}\n🔹 बॉक्स का रंग: ${selectedColorName}\n🔹 करंट रेशियो: ${selectedRatio}\n🔹 एक्यूरेसी क्लास: ${selectedClass}\n\nधन्यवाद!`;
+            const whatsappUrl = `https://whatsapp.com{myWhatsAppNumber}&text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
