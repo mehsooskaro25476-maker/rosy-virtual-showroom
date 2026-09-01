@@ -8,197 +8,139 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: #0f172a;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             color: #fff;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             background: #1e293b;
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             border: 1px solid #334155;
         }
         .company-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border-bottom: 2px solid #3b82f6;
             padding-bottom: 15px;
         }
-        .company-header h1 { font-size: 1.6rem; color: #3b82f6; }
-        .company-header p { font-size: 0.9rem; color: #94a3b8; margin-top: 5px; }
+        .company-header h1 { font-size: 1.8rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; }
+        .company-header p { font-size: 1rem; color: #94a3b8; margin-top: 5px; font-weight: 500; }
         
-        .product-display-window {
-            width: 100%;
-            height: 220px;
-            background: radial-gradient(circle, #334155 0%, #0f172a 100%);
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border: 1px solid #475569;
-        }
-        
-        .ct-box-simulation {
-            width: 100px;
-            height: 100px;
-            border-radius: 15px;
+        /* 1. भव्य स्वागत स्क्रीन */
+        #welcome-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #0f172a; z-index: 99999; display: flex;
+            align-items: center; justify-content: center; padding: 20px;
             transition: all 0.5s ease;
-            position: relative;
+        }
+        .welcome-card {
+            background: #1e293b; max-width: 750px; width: 100%; border-radius: 20px;
+            padding: 30px; border: 2px solid #3b82f6; display: flex; flex-direction: column; align-items: center; gap: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); text-align: center;
+        }
+        @media(min-width: 600px) {
+            .welcome-card { flex-direction: row; text-align: left; }
+        }
+        .welcome-img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #3b82f6; box-shadow: 0 0 15px rgba(59,130,246,0.4); }
+        .welcome-content h2 { color: #fff; font-size: 1.5rem; margin-bottom: 10px; }
+        .welcome-content h3 { color: #3b82f6; font-size: 1.1rem; margin-bottom: 15px; }
+        .welcome-content p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        
+        /* 2. लीडरशिप टीम ग्रिड */
+        .section-title-main { font-size: 1.3rem; color: #3b82f6; margin: 30px 0 15px 0; border-left: 4px solid #3b82f6; padding-left: 10px; text-transform: uppercase; font-weight: bold; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        
+        .leader-card { background: #0f172a; border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #334155; transition: transform 0.2s; }
+        .leader-card:hover { transform: translateY(-5px); border-color: #3b82f6; }
+        .leader-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #475569; margin-bottom: 12px; background: #1e293b; }
+        .leader-card.ceo .leader-img { border-color: #ffd700; } /* गोल्ड बॉर्डर फ़ॉर CEO */
+        .leader-name { font-size: 1.1rem; font-weight: bold; color: #fff; margin-bottom: 4px; }
+        .leader-role { font-size: 0.85rem; color: #3b82f6; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
+        .leader-desc { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; text-align: justify; }
+
+        /* 3. 3D कस्टमाइजेशन डिस्प्ले विंडो */
+        .product-display-window {
+            width: 100%; height: 240px; background: radial-gradient(circle, #334155 0%, #0f172a 100%);
+            border-radius: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; margin-bottom: 20px; overflow: hidden; border: 1px solid #475569;
+        }
+        .ct-box-simulation {
+            width: 105px; height: 105px; border-radius: 15px; transition: all 0.5s ease; position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,255,255,0.2);
-            transform: rotateX(15deg) rotateY(-15deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transform: rotateX(15deg) rotateY(-15deg); display: flex; justify-content: center; align-items: center;
         }
-        .ct-box-simulation::before {
-            content: '';
-            width: 45px;
-            height: 45px;
-            background: #0f172a;
-            border-radius: 50%;
-            box-shadow: inset 0 5px 10px rgba(0,0,0,0.8);
-        }
+        .ct-box-simulation::before { content: ''; width: 45px; height: 45px; background: #0f172a; border-radius: 50%; box-shadow: inset 0 5px 10px rgba(0,0,0,0.8); }
+        .product-label-badge { position: absolute; top: 15px; left: 15px; background: #3b82f6; color: #fff; padding: 5px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 20px; }
 
-        .product-label-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #3b82f6;
-            color: #fff;
-            padding: 5px 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border-radius: 20px;
-        }
-
-        .section-title { font-size: 1rem; margin-bottom: 10px; color: #cbd5e1; font-weight: 600; }
+        /* कस्टमाइज़र बटन और रंग डॉट्स */
+        .section-sub-title { font-size: 0.95rem; margin-bottom: 10px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; gap: 5px; }
         .selector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .select-btn {
-            background: #334155; border: 1px solid #475569; color: #cbd5e1;
-            padding: 10px 5px; border-radius: 10px; font-weight: bold; cursor: pointer;
-            font-size: 0.85rem; text-align: center; transition: all 0.2s;
-        }
-        .select-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
-
+        .select-btn { background: #334155; border: 1px solid #475569; color: #cbd5e1; padding: 11px 5px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 0.85rem; text-align: center; transition: all 0.2s; }
+        .select-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.4); }
+        
         .color-flex { display: flex; gap: 15px; margin-bottom: 25px; align-items: center; }
-        .color-dot {
-            width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
-            border: 3px solid #1e293b; transition: all 0.2s;
-        }
+        .color-dot { width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 3px solid #1e293b; transition: all 0.2s; }
         .color-dot.active { border-color: #fff; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
-        .inquiry-btn-container { margin-top: 25px; }
-        .whatsapp-btn {
-            width: 100%; background: #25d366; color: #fff; border: none;
-            padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: bold;
-            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.4); transition: transform 0.2s;
-        }
+        /* असली प्रोडक्ट बैनर */
+        .web-product-banner { width: 100%; border-radius: 15px; border: 1px solid #475569; margin-bottom: 25px; background: #0f172a; padding: 10px; text-align: center; }
+        .web-product-banner img { width: 100%; height: auto; border-radius: 10px; }
+
+        /* व्हाट्सएप बटन */
+        .whatsapp-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+        .enter-btn { background: #3b82f6; color: #fff; border: none; padding: 12px 25px; border-radius: 25px; font-size: 1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(59,130,246,0.4); margin-top: 10px; }
+
+        /* रॉ मटीरियल ट्रस्ट कार्ड */
+        .material-card { background: #0f172a; padding: 20px; border-radius: 15px; border: 1px dashed #3b82f6; margin-bottom: 25px; }
+        .material-card li { margin-left: 20px; margin-bottom: 8px; font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="company-header">
-            <h1>ROSY Electronics</h1>
-            <p>Groups of Companies — Custom Current Transformers</p>
-        </div>
-
-        <div class="product-display-window">
-            <span id="product-badge" class="product-label-badge">Metering CT</span>
-            <div id="ct-object" class="ct-box-simulation" style="background-color: #78350f;"></div>
-            <p style="font-size: 0.8rem; color: #64748b; position: absolute; bottom: 10px;">Interactive Virtual Preview</p>
-        </div>
-
-        <div class="section-title">1. उत्पाद का प्रकार (Product Type) चुनें:</div>
-        <div class="selector-grid" id="product-group">
-            <button class="select-btn active" onclick="setProduct('Metering CT', this)">Metering CT</button>
-            <button class="select-btn" onclick="setProduct('Protection CT', this)">Protection CT</button>
-            <button class="select-btn" onclick="setProduct('Split-Core CT', this)">Split-Core CT</button>
-        </div>
-
-        <div class="section-title">2. बॉक्स का रंग (Resin/Casing Color) बदलें:</div>
-        <div class="color-flex">
-            <div class="color-dot active" style="background-color: #78350f;" onclick="setColor('#78350f', this)"></div>
-            <div class="color-dot" style="background-color: #475569;" onclick="setColor('#475569', this)"></div>
-            <div class="color-dot" style="background-color: #1e3a8a;" onclick="setColor('#1e3a8a', this)"></div>
-        </div>
-
-        <div class="section-title">3. करंट रेशियो (Current Ratio) चुनें:</div>
-        <div class="selector-grid" id="ratio-group">
-            <button class="select-btn active" onclick="setRatio('100/5A', this)">100/5A</button>
-            <button class="select-btn" onclick="setRatio('400/5A', this)">400/5A</button>
-            <button class="select-btn" onclick="setRatio('800/5A', this)">800/5A</button>
-        </div>
-
-        <div class="section-title">4. शुद्धता वर्ग (Accuracy Class) चुनें:</div>
-        <div class="selector-grid" id="class-group">
-            <button class="select-btn active" onclick="setClass('Class 0.5', this)">Class 0.5</button>
-            <button class="select-btn" onclick="setClass('Class 0.2s', this)">Class 0.2s</button>
-            <button class="select-btn" onclick="setClass('Class 1.0', this)">Class 1.0</button>
-        </div>
-
-        <div class="inquiry-btn-container">
-            <button class="whatsapp-btn" onclick="sendInquiry()">
-                💬 WhatsApp पर कोटेशन मांगें
-            </button>
+    <!-- 1. भव्य स्वागत स्क्रीन (मिसेज वीना जिंदल का संदेश) -->
+    <div id="welcome-overlay">
+        <div class="welcome-card">
+            <!-- वीना जी की तस्वीर -->
+            <img class="welcome-img" src="https://githubusercontent.com" alt="Mrs Veena Jindal" onerror="this.src='https://placehold.co'">
+            <div class="welcome-content">
+                <h2>नमस्ते और हार्दिक स्वागत! 👋</h2>
+                <h3>Mrs. Veena Jindal — Marketing Head</h3>
+                <p>मैं वीना जिंदल, ROSY Electronics Groups of Companies की ओर से हमारे डिजिटल वर्चुअल शोरूम में आपका स्वागत करती हूँ। पिछले 50 से अधिक वर्षों से, हमारी कंपनी विद्युत, ऑटोमोटिव और स्विचगियर उद्योगों के लिए सटीकता और उच्च गुणवत्ता वाले वाउंड कॉम्पोनेंट्स (Wound Components) बनाने में एक विश्वसनीय नाम रही है। हम केवल उत्पाद नहीं बेचते, बल्कि आपके द्वारा दिए गए सटीक मापदंडों (Specifications) के आधार पर आपके भरोसे को डिज़ाइन करते हैं।</p>
+                <button class="enter-btn" onclick="enterShowroom()">🌐 डिजिटल शोरूम में प्रवेश करें</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        let selectedProduct = "Metering CT";
-        let selectedColorName = "Resin Cast Brown";
-        let selectedRatio = "100/5A";
-        let selectedClass = "Class 0.5";
+    <!-- मुख्य शोरूम कंटेनर -->
+    <div class="container">
+        <div class="company-header">
+            <h1>ROSY Electronics Pvt. Ltd.</h1>
+            <p>Groups of Companies — An ISO 9001:2008 Certified Company</p>
+        </div>
 
-        // ⚠️ यहाँ अपना सही व्हाट्सएप्प नंबर बिना किसी स्पेस या '+' के लिखें
-        const myWhatsAppNumber = "919876543210"; 
-
-        function setProduct(name, element) {
-            selectedProduct = name;
-            document.getElementById('product-badge').innerText = name;
-            let buttons = document.getElementById('product-group').querySelectorAll('.select-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function setColor(hex, element) {
-            document.getElementById('ct-object').style.backgroundColor = hex;
-            if(hex === '#78350f') selectedColorName = "Resin Cast Brown";
-            if(hex === '#475569') selectedColorName = "Industrial Grey";
-            if(hex === '#1e3a8a') selectedColorName = "Warning Blue";
-            let dots = document.querySelectorAll('.color-dot');
-            dots.forEach(dot => dot.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function setRatio(ratio, element) {
-            selectedRatio = ratio;
-            let buttons = document.getElementById('ratio-group').querySelectorAll('.select-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function setClass(cls, element) {
-            selectedClass = cls;
-            let buttons = document.getElementById('class-group').querySelectorAll('.select-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function sendInquiry() {
-            const message = `नमस्ते Rosy Electronics! 👋\n\nमैंने आपके वर्चुअल शोरूम पर एक करंट ट्रांसफॉर्मर कस्टमाइज़ किया है, कृपया मुझे इसका कोटेशन भेजें:\n\n🔹 उत्पाद का प्रकार: ${selectedProduct}\n🔹 बॉक्स का रंग: ${selectedColorName}\n🔹 करंट रेशियो: ${selectedRatio}\n🔹 एक्यूरेसी क्लास: ${selectedClass}\n\nधन्यवाद!`;
-            const whatsappUrl = `https://whatsapp.com{myWhatsAppNumber}&text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-    </script>
-</body>
-</html>
+        <!-- 2. शीर्ष मैनेजमेंट सेक्शन (3-Columns) -->
+        <div class="section-title-main">📁 Leadership & Core Vision</div>
+        <div class="grid-3">
+            <!-- CEO -->
+            <div class="leader-card ceo">
+                <img class="leader-img" src="https://githubusercontent.com" alt="Mr Neeraj Bharara" onerror="this.src='https://placehold.co'">
+                <div class="leader-name">Mr. Neeraj Bharara</div>
+                <div class="leader-role">Chief Executive Officer (CEO)</div>
+                <div class="leader-desc">50 से अधिक वर्षों से सटीकता, ईमानदारी और कस्टमाइज्ड इंजीनियरिंग के माध्यम से अपने क्लाइंट्स के भरोसे को सुदृढ़ करने के मुख्य नीति निर्धारक।</div>
+            </div>
+            <!-- COO -->
+            <div class="leader-card">
+                <img class="leader-img" src="https://githubusercontent.com" alt="Mr Surjit K Singh" onerror="this.src='https://placehold.co'">
+                <div class="leader-name">Mr. Surjit K Singh</div>
+                <div class="leader-role">Chief Operating Officer (COO)</div>
+                <div class="leader-desc">कंपनी के दैनिक ऑपरेशंस, सुचारू मैन्युफैक्चरिंग, मजबूत सप्लाई चेन और ऑन-टाइम डिलीवरी मैनेजमेंट के रणनीतिक प्रमुख।</div>
+            </div>
+            <!-- Technical Director -->
+            <div class="leader-card">
