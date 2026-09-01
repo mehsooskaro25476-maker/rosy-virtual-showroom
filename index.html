@@ -19,58 +19,64 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #0b0f19; z-index: 99999; display: flex;
             justify-content: center; align-items: center; padding: 20px;
-            transition: all 0.6s ease-in-out;
+            transition: all 0.5s ease-in-out;
         }
         .welcome-card {
             background: #1e293b; max-width: 800px; width: 100%; border-radius: 20px;
             padding: 30px; border: 1px solid #334155; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 25px; text-align: center;
         }
         @media(min-width: 600px) {
             .welcome-card { flex-direction: row; text-align: left; }
         }
         .profile-img-container {
-            width: 150px; height: 150px; border-radius: 50%; overflow: hidden;
+            width: 160px; height: 160px; border-radius: 50%; overflow: hidden;
             border: 4px solid #3b82f6; box-shadow: 0 0 20px rgba(59,130,246,0.4); flex-shrink: 0;
-            background: #475569; display: flex; justify-content: center; align-items: center;
+            background: #334155;
         }
-        .welcome-text-side h2 { font-size: 1.6rem; color: #3b82f6; margin-bottom: 10px; }
-        .welcome-text-side p { font-size: 1rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 15px; }
+        .profile-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .welcome-text-side h2 { font-size: 1.6rem; color: #3b82f6; margin-bottom: 5px; }
+        .welcome-text-side p { font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; text-align: justify; }
+        
         .enter-btn {
-            background: #3b82f6; color: #fff; border: none; padding: 14px 28px;
+            background: #3b82f6; color: #fff; border: none; padding: 14px 32px;
             border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
             box-shadow: 0 4px 15px rgba(59,130,246,0.4); transition: all 0.2s;
         }
-        .enter-btn:hover { background: #2563eb; transform: translateY(-2px); }
+        .enter-btn:active { background: #1d4ed8; transform: scale(0.98); }
 
         /* 2. मुख्य शोरूम कंटेनर */
-        .container {
-            max-width: 900px; margin: 0 auto; padding: 20px;
-        }
+        .container { max-width: 950px; margin: 0 auto; padding: 20px; }
         .company-header {
             text-align: center; margin-bottom: 30px; border-bottom: 2px solid #3b82f6; padding-bottom: 15px;
         }
-        .company-header h1 { font-size: 2rem; color: #3b82f6; }
+        .company-header h1 { font-size: 2.2rem; color: #3b82f6; font-weight: bold; letter-spacing: 1px; }
+        .company-header p { color: #94a3b8; font-size: 1rem; margin-top: 5px; }
         
         /* ग्रिड सिस्टम */
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 40px; }
         
         .card {
-            background: #1e293b; border-radius: 15px; padding: 20px; border: 1px solid #334155;
-            text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: #1e293b; border-radius: 15px; padding: 25px; border: 1px solid #334155;
+            text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s;
         }
+        .card:hover { transform: translateY(-5px); }
         .card-img {
-            width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 15px;
-            border: 3px solid #ff9900; background: #475569; display: flex; justify-content: center; align-items: center;
+            width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 15px;
+            border: 3px solid #ff9900; overflow: hidden; background: #334155;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .card h3 { font-size: 1.2rem; color: #ff9900; margin-bottom: 5px; }
-        .card h4 { font-size: 0.9rem; color: #94a3b8; margin-bottom: 10px; }
-        .card p { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card h3 { font-size: 1.25rem; color: #ff9900; margin-bottom: 5px; font-weight: bold; }
+        .card h4 { font-size: 0.95rem; color: #3b82f6; margin-bottom: 12px; font-weight: 600; }
+        .card p { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; text-align: center; }
 
         /* 3D कस्टमाइजेशन विंडो */
         .product-display-window {
-            width: 100%; height: 250px; background: radial-gradient(circle, #334155 0%, #0f172a 100%);
+            width: 100%; height: 260px; background: radial-gradient(circle, #334155 0%, #0f172a 100%);
             border-radius: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center;
             position: relative; margin-bottom: 30px; border: 1px solid #475569;
         }
@@ -83,37 +89,39 @@
         .product-label-badge { position: absolute; top: 15px; left: 15px; background: #3b82f6; color: #fff; padding: 5px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 20px; }
 
         /* बटन सिलेक्शन */
-        .section-title { font-size: 1.1rem; margin-bottom: 12px; color: #e2e8f0; font-weight: 600; border-left: 4px solid #3b82f6; padding-left: 10px; }
-        .selector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .section-title { font-size: 1.15rem; margin-bottom: 15px; color: #f8fafc; font-weight: 600; border-left: 4px solid #3b82f6; padding-left: 12px; margin-top: 10px; }
+        .selector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
         .select-btn {
             background: #334155; border: 1px solid #475569; color: #cbd5e1;
             padding: 12px 5px; border-radius: 10px; font-weight: bold; cursor: pointer;
             font-size: 0.85rem; text-align: center; transition: all 0.2s;
         }
         .select-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
-        .color-flex { display: flex; gap: 15px; margin-bottom: 30px; }
-        .color-dot { width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 3px solid #1e293b; transition: all 0.2s; }
-        .color-dot.active { border-color: #fff; transform: scale(1.15); }
+        
+        .color-flex { display: flex; gap: 20px; margin-bottom: 30px; }
+        .color-dot { width: 38px; height: 38px; border-radius: 50%; cursor: pointer; border: 3px solid #1e293b; transition: all 0.2s; }
+        .color-dot.active { border-color: #fff; transform: scale(1.18); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
         .whatsapp-btn {
             width: 100%; background: #25d366; color: #fff; border: none; padding: 18px; border-radius: 12px;
-            font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            font-size: 1.25rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            transition: all 0.2s; margin-bottom: 40px;
         }
+        .whatsapp-btn:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
-    <!-- 1. भव्य स्वागत स्क्रीन (वीना जी की प्रोफाइल के साथ) -->
+    <!-- 1. भव्य स्वागत स्क्रीन (वीना जी की असली तस्वीर के साथ) -->
     <div id="welcome-screen">
         <div class="welcome-card">
             <div class="profile-img-container">
-                <!-- यहाँ वीना जी का टेक्स्ट स्टाइल अवतार है, असली फोटो लिंक आने पर बदल जाएगा -->
-                <span style="font-size:3.5rem;">👩‍💼</span>
+                <img src="https://rosyelectronics.com" alt="Mrs. Veena Jindal" onerror="this.src='https://placehold.co'">
             </div>
             <div class="welcome-text-side">
                 <h2>Mrs. Veena Jindal</h2>
-                <h4 style="color:#a855f7; margin-bottom:10px;">Marketing Head</h4>
-                <p>नमस्ते और हार्दिक स्वागत! मैं वीना जिंदल, ROSY Electronics Groups of Companies की ओर से हमारे डिजिटल वर्चुअल शोरूम में आपका स्वागत करती हूँ। पिछले 50 से अधिक वर्षों से हमारी कंपनी सटीकता और उच्च गुणवत्ता वाले कस्टमाइज्ड करंट ट्रांसफॉर्मर्स बनाने में एक विश्वसनीय नाम रही है। आइए, नीचे दिए गए बटन पर क्लिक करें और हमारे डिजिटल शोरूम में प्रवेश करें।</p>
+                <h4 style="color:#3b82f6; font-weight:600; margin-bottom:12px;">Marketing Head</h4>
+                <p>नमस्ते और हार्दिक स्वागत! मैं वीना जिंदल, ROSY Electronics Groups of Companies की ओर से हमारे डिजिटल वर्चुअल शोरूम में आपका स्वागत करती हूँ। पिछले 50 से अधिक वर्षों से हमारी कंपनी सटीकता और उच्च गुणवत्ता वाले कस्टमाइज्ड करंट ट्रांसफॉर्मर्स बनाने में एक विश्वसनीय नाम रही है। हम केवल उत्पाद नहीं बेचते, बल्कि आपके द्वारा दिए गए सटीक मापदंडों (Specifications) के आधार पर आपके भरोसे को डिज़ाइन करते हैं। आइए, नीचे दिए गए बटन पर क्लिक करें और हमारे डिजिटल शोरूम में प्रवेश करें।</p>
                 <button class="enter-btn" onclick="enterShowroom()">शोरूम में प्रवेश करें 🚀</button>
             </div>
         </div>
@@ -161,11 +169,3 @@
             <button class="select-btn" onclick="setClass('Class 1.0', this)">Class 1.0</button>
         </div>
 
-        <button class="whatsapp-btn" onclick="sendInquiry()">💬 WhatsApp पर कोटेशन मांगें</button>
-
-        <br><br><hr style="border-color:#334155;"><br>
-
-        <!-- लीडरशिप टीम (CEO, COO, Technical Director) -->
-        <div class="section-title">Our Leadership & Vision</div>
-        <div class="grid-3">
-            <div class="card"><div class="card-img"><span style="font-size:2rem;">👨‍💼</span></div><h3>Mr. Neeraj Bharara</h3><h4>Chief Executive Officer (CEO)</h4><p>50 से अधिक वर्षों से सटीकता और ईमानदारी के माध्यम से अपने क्लाइंट्स के भरोसे को सुदृढ़ करने में प्रतिबद्ध।</p></div>
